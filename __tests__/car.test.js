@@ -24,6 +24,9 @@ describe("CarInfo 클래스 테스트", () => {
 
     CAR.move(5);
     expect(CAR.getPosition()).toBe(2);
+
+    CAR.move(3);
+    expect(CAR.getPosition()).toBe(2);
   });
 
   test("랜덤 값이 4 미만이면 멈춘다", () => {
@@ -51,6 +54,6 @@ describe("CarInfo 클래스 테스트", () => {
     expect(CAR.getDisplayedPosition()).toBe("--");
     
     CAR.move(3);
-    expect(CAR.getDisplayedPosition()).toBe("");
+    expect(CAR.getDisplayedPosition()).toBe("--");
   });
 });
