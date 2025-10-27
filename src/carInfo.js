@@ -16,7 +16,7 @@ export default class CarInfo {
     }
   }
 
-  move() {
+  move(randomValue) {
     if (randomValue >= CarInfo.MOVE_THRESHOLD) {
       this.position++;
     }
