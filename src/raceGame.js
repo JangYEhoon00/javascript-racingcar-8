@@ -1,35 +1,42 @@
-import CarInfo from "./carInfo";
-import { makeRandomNumber } from "./randomNumber";
+import CarInfo from "./carInfo.js";
+import makeRandomNumber from "./randomNumber.js";
+import { Console } from "@woowacourse/mission-utils";
 
 export default class RaceGame {
-  cars;
-  constructor(carName) {
-    this.cars = this.createCars(carName);
+  constructor(carNames, roundCount) {
+    this.cars = this.createCars(carNames);
+    this.roundCount = roundCount;
   }
 
-  createCars(carName) {
-    const NAME_ARR = carName.split(",");
+  createCars(carNames) {
+    const NAME_ARRAY = carNames.split(",");
 
-    return NAME_ARR.map((name) => {
-      return new CarInfo(name.trim());
-    });
+    return NAME_ARRAY.map((name) => new CarInfo(name.trim()));
   }
 
-  playGameRound() {
+  playRound() {
     this.cars.forEach((car) => {
-      const RANDOM_NUMBER = makeRandomNumber();
-      car.move(RANDOM_NUMBER);
+      const randomNumber = makeRandomNumber();
+      car.move(randomNumber);
     });
   }
 
-  getGameResult() {
-    return this.cars.map((car) => ({
-      name: car.getName(),
-      position: car.getPositionDisplay(),
-    }));
+  displayRoundResult() {
+    this.cars.forEach((car) => {
+      Console.print(`${car.getName()} : ${car.getDisplayedPosition()}`);
+    });
+    Console.print("");
   }
 
-  getWinner() {
+  play() {
+    Console.print("실행 결과");
+    for (let i = 0; i < this.roundCount; i++) {
+      this.playRound();
+      this.displayRoundResult();
+    }
+  }
+
+  getWinners() {
     const MAX_POSITION = Math.max(...this.cars.map((car) => car.getPosition()));
     return this.cars
       .filter((car) => car.getPosition() === MAX_POSITION)
