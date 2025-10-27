@@ -14,7 +14,7 @@ export default class RaceGame {
     return NAME_ARRAY.map((name) => new CarInfo(name.trim()));
   }
 
-  playRound() {
+  playRound(RandomNumber) {
     this.cars.forEach((car) => {
       const randomNumber = makeRandomNumber();
       car.move(randomNumber);
